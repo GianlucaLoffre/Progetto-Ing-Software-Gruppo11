@@ -9,15 +9,27 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <!-- Configurazione ambiente Java 21 LTS -->
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Versioni delle librerie -->
         <junit.version>5.11.3</junit.version>
-        <javafx.version>17.0.12</javafx.version>
+        <javafx.version>21.0.5</javafx.version>
     </properties>
 
     <dependencies>
-        <!-- Framework di testing JUnit 5 -->
+        <!-- ========================================== -->
+        <!-- Framework di testing JUnit 5               -->
+        <!-- ========================================== -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
@@ -31,7 +43,9 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- JavaFX per l'interfaccia grafica (GUI) -->
+        <!-- ========================================== -->
+        <!-- JavaFX per interfaccia grafica (GUI)       -->
+        <!-- ========================================== -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -46,21 +60,30 @@
 
     <build>
         <plugins>
-            <!-- Plugin per l'esecuzione automatizzata dei test unitari da Maven -->
+            <!-- Plugin per la compilazione Java 21 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <release>21</release>
+                </configuration>
+            </plugin>
+
+            <!-- Plugin per l'esecuzione automatizzata dei test unitari JUnit 5 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.2</version>
             </plugin>
 
-            <!-- Plugin per l'avvio rapido dell'interfaccia JavaFX -->
+            <!-- Plugin per l'avvio e la gestione automatica di JavaFX -->
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <!-- Aggiornare con la classe Main effettiva quando verrà creata
- -->
+                    <!-- Aggiornare con il percorso della classe Main quando creata -->
                     <mainClass>it.unisa.ingsoftware.App</mainClass>
                 </configuration>
             </plugin>
